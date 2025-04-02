@@ -1,0 +1,36 @@
+name: Auto Organize Baekjoon Problems
+
+on:
+  push:
+    paths:
+      - 백준_임시/**.py
+      - organize_problems.py
+
+jobs:
+  organize-and-push:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+
+    - name: Install dependencies
+      run: pip install requests
+
+    - name: Run organize script
+      run: python organize_problems.py
+
+    - name: Commit and push changes
+      env:
+        GH_PAT: ${{ secrets.GH_PAT }}
+      run: |
+        git config user.name "github-actions[bot]"
+        git config user.email "github-actions[bot]@users.noreply.github.com"
+        git add .
+        git commit -m "🔄 자동 정리: 문제 폴더 분류 완료" || echo "No changes to commit"
+        git push https://x-access-token:${GH_PAT}@github.com/${{ github.repository }} HEAD:main
