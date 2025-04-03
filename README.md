@@ -101,7 +101,7 @@ GitHub Actions가 실행되어 `.py` 파일이 아래처럼 정리됩니다:
 3. **`GH_PAT`라는 이름으로 Personal Access Token을 등록**합니다.
 4. `백준_임시/`에 문제 파일을 추가하고 push하면 자동 정리됩니다!
 
-🔐 **주의**: 생성된 토큰은 반드시 `repo > contents: read & write` 권한을 포함해야 합니다.
+🔐 **주의**: 생성된 토큰은 반드시 `repo > contents: read & write`,`repo > workflows: read & write`  권한을 포함해야 합니다.
 
 ---
 
